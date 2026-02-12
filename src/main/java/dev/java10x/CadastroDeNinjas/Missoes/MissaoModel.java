@@ -22,7 +22,7 @@ public class MissaoModel{
     @Column(unique = true)
     private String nome;
     private String dificuldade;
-    @OneToMany(mappedBy = "missao_id") // Uma missao pode ser designada para vários ninjas
+    @OneToMany(mappedBy = "missao") // Uma missao pode ser designada para vários ninjas
     @JsonIgnore
     private List<NinjaModel> ninjas;
 }

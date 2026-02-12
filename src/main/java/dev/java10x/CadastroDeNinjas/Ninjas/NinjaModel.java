@@ -21,5 +21,5 @@ public class NinjaModel{
     private int idade;
     @ManyToOne // Vários ninjas podem ter a mesma missao
     @JoinColumn(name = "missao_id") // Fk
-    private MissaoModel missao_id;
+    private MissaoModel missao;
 }
