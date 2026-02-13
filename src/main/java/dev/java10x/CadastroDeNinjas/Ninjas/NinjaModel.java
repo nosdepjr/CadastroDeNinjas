@@ -19,6 +19,8 @@ public class NinjaModel{
     @Column(unique = true)
     private String email;
     private int idade;
+    private String imgURL;
+    private String rank;
     @ManyToOne // Vários ninjas podem ter a mesma missao
     @JoinColumn(name = "missao_id") // Fk
     private MissaoModel missao;
