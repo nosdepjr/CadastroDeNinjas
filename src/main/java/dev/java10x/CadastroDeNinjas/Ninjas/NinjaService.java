@@ -43,6 +43,7 @@ public class NinjaService{
     public NinjaDTO alterarNinjaPorId(Long id, NinjaDTO ninjaModificado){
         Optional<NinjaModel> ninjaExistente = ninjaRepository.findById(id);
         if (ninjaExistente.isPresent()) {
+            ninjaMapper.updateDTOFromModel(ninjaExistente.orElse(null), ninjaModificado);
             NinjaModel ninjaAtualizado = ninjaMapper.mapToModel(ninjaModificado);
             ninjaAtualizado.setId(id);
             return ninjaMapper.mapToDTO(ninjaRepository.save(ninjaAtualizado));
