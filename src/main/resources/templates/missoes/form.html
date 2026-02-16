@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastro Missão</title>
+
+    <style>
+        :root {
+            --java-orange: #F89820;
+            --java-orange-rgb: 248, 152, 32;
+        }
+
+        body {
+            margin: 0;
+            padding: 30px;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #0f0f0f, #1c1c1c);
+            color: white;
+            text-align: center;
+        }
+
+        h1 {
+            color: var(--java-orange);
+            text-shadow: 0 0 10px rgba(var(--java-orange-rgb), 0.5);
+        }
+
+        form {
+            background: #111;
+            padding: 30px;
+            width: 40%;
+            margin: auto;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(var(--java-orange-rgb), 0.4);
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid var(--java-orange);
+            background: #222;
+            color: white;
+        }
+
+        button {
+            padding: 10px 15px;
+            background: var(--java-orange);
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:hover {
+            opacity: 0.85;
+        }
+
+        a {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 15px;
+            background: gray;
+            color: white;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+
+        .erro {
+            color: red;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<h1 th:text="${missao.id == null ? 'Nova Missão' : 'Editar Missão'}"></h1>
+
+<div th:if="${erro}" class="erro" th:text="${erro}"></div>
+
+<form th:action="${missao.id == null} ? @{/missoes/ui/salvar}
+                                       : @{/missoes/ui/atualizar/{id}(id=${missao.id})}"
+      th:object="${missao}"
+      method="post">
+
+    <input type="text" th:field="*{nome}" placeholder="Nome da Missão" required>
+    <input type="text" th:field="*{dificuldade}" placeholder="Dificuldade" required>
+
+    <button type="submit">Salvar</button>
+</form>
+
+<a href="/missoes/ui/listar">Voltar</a>
+
+</body>
+</html>

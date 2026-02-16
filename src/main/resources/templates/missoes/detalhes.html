@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Detalhes da Missão</title>
+
+    <style>
+        :root {
+            --java-orange: #F89820;
+            --java-orange-rgb: 248, 152, 32;
+        }
+
+        body {
+            margin: 0;
+            padding: 30px;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #0f0f0f, #1c1c1c);
+            color: white;
+            text-align: center;
+        }
+
+        h1 {
+            color: var(--java-orange);
+            text-shadow: 0 0 10px rgba(var(--java-orange-rgb), 0.5);
+        }
+
+        .card {
+            background: #111;
+            padding: 30px;
+            width: 50%;
+            margin: auto;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(var(--java-orange-rgb), 0.4);
+        }
+
+        a {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 15px;
+            background: gray;
+            color: white;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Detalhes da Missão</h1>
+
+<div class="card">
+    <h2 th:text="${missao.nome}"></h2>
+
+    <p><strong>Dificuldade:</strong>
+        <span th:text="${missao.dificuldade}"></span>
+    </p>
+
+    <p><strong>Ninjas Vinculados:</strong>
+        <span th:text="${missao.quantidadeNinjas}"></span>
+    </p>
+</div>
+
+<a href="/missoes/ui/listar">Voltar</a>
+
+</body>
+</html>

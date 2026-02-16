@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Lista de Ninjas</title>
+    <title>Lista de Missões</title>
 
     <style>
         body {
@@ -13,9 +13,10 @@
             color: white;
         }
 
-        h1, h2 {
+        h1 {
             text-align: center;
             color: #F89820;
+            margin-bottom: 30px;
         }
 
         .button-container {
@@ -28,6 +29,7 @@
             border-collapse: collapse;
             background: #111;
             box-shadow: 0 0 15px rgba(248, 152, 32, 0.4);
+            text-align: center;
         }
 
         th {
@@ -38,17 +40,10 @@
         td {
             padding: 12px;
             border-bottom: 1px solid #333;
-            text-align: center;
         }
 
         tr:hover {
             background: #222;
-        }
-
-        img {
-            border-radius: 50%;
-            border: 2px solid #F89820;
-            object-fit: cover;
         }
 
         a, button {
@@ -62,7 +57,7 @@
         }
 
         .btn-add { background: #00c853; color: white; }
-        .btn-missoes { background: #1565c0; color: white; }
+        .btn-ninjas { background: #1565c0; color: white; }
         .btn-view { background: #1565c0; color: white; }
         .btn-edit { background: #ffab00; color: black; }
         .btn-delete { background: #d50000; color: white; }
@@ -74,16 +69,15 @@
 </head>
 <body>
 
-<h1>📜 Sistema de Gerenciamento Oficial dos Ninjas</h1>
-<h2>SiGON</h2>
+<h1>📜 Registro de Missões</h1>
 
 <div class="button-container">
-    <a class="btn-add" th:href="@{/ninjas/ui/adicionar}">
-        + Novo Ninja
+    <a class="btn-add" th:href="@{/missoes/ui/adicionar}">
+        + Nova Missão
     </a>
 
-    <a class="btn-missoes" th:href="@{/missoes/ui/listar}">
-        📜 Ver Missões
+    <a class="btn-ninjas" th:href="@{/ninjas/ui/listar}">
+        🥷 Ver Ninjas
     </a>
 </div>
 
@@ -91,50 +85,32 @@
     <thead>
     <tr>
         <th>ID</th>
-        <th>Imagem</th>
         <th>Nome</th>
-        <th>Idade</th>
-        <th>Email</th>
-        <th>Rank</th>
-        <th>Missão</th>
+        <th>Dificuldade</th>
+        <th>Ninjas Vinculados</th>
         <th>Ações</th>
     </tr>
     </thead>
 
     <tbody>
-    <tr th:each="ninja : ${ninjas}">
-        <td th:text="${ninja.id}"></td>
-
-        <td>
-            <img th:src="${ninja.imgURL}" width="70" height="70">
-        </td>
-
-        <td th:text="${ninja.nome}"></td>
-        <td th:text="${ninja.idade}"></td>
-        <td th:text="${ninja.email}"></td>
-        <td th:text="${ninja.rank}"></td>
-
-        <td>
-            <span th:if="${ninja.missao != null}"
-                  th:text="${ninja.missao.nome + ' - ' + ninja.missao.dificuldade}">
-            </span>
-            <span th:if="${ninja.missao == null}">
-                Sem missão
-            </span>
-        </td>
+    <tr th:each="missao : ${missoes}">
+        <td th:text="${missao.id}"></td>
+        <td th:text="${missao.nome}"></td>
+        <td th:text="${missao.dificuldade}"></td>
+        <td th:text="${missao.quantidadeNinjas}"></td>
 
         <td>
             <a class="btn-view"
-               th:href="@{/ninjas/ui/listar/{id}(id=${ninja.id})}">
+               th:href="@{/missoes/ui/listar/{id}(id=${missao.id})}">
                 Ver
             </a>
 
             <a class="btn-edit"
-               th:href="@{/ninjas/ui/editar/{id}(id=${ninja.id})}">
+               th:href="@{/missoes/ui/editar/{id}(id=${missao.id})}">
                 Alterar
             </a>
 
-            <form th:action="@{/ninjas/ui/deletar/{id}(id=${ninja.id})}"
+            <form th:action="@{/missoes/ui/deletar/{id}(id=${missao.id})}"
                   method="post"
                   style="display:inline;">
                 <button type="submit" class="btn-delete">
