@@ -1,5 +1,6 @@
 package dev.java10x.CadastroDeNinjas.Ninjas;
 
+import dev.java10x.CadastroDeNinjas.Missoes.MissaoDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,10 +24,15 @@ public class NinjaController{
     }
 
     @PostMapping("/criar")
-    public ResponseEntity<NinjaDTO> criarNinja(@RequestBody NinjaDTO ninja) {
-        NinjaDTO ninjaDTO = ninjaService.criaNinja(ninja);
-        return ResponseEntity.status(HttpStatus.CREATED)
+    public ResponseEntity<?> criarNinja(@RequestBody NinjaDTO ninja) {
+        try {
+            NinjaDTO ninjaDTO = ninjaService.criaNinja(ninja);
+            return ResponseEntity.status(HttpStatus.CREATED)
                 .body(ninjaDTO);
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body(e.getMessage());
+        }
     }
 
     @GetMapping("/listar")
